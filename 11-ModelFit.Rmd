@@ -18,11 +18,11 @@ knitr::include_graphics("images/Ch11_discrepancy.png")
 
 The $\chi^2$ test of exact fit is based on the assumption that exact fit holds in the population, i.e., the population discrepancy is zero ($\mathbf{\Sigma}_{\text{population}} = \mathbf{\Sigma}_{\text{model}}$).  Under this null hypothesis, the $p$ value associated with the observed $\chi^2$ fit statistic gives the probability of observing a sample discrepancy (i.e., the difference between $\hat{\mathbf\Sigma}_{\text{population}}$ and $\hat{\mathbf\Sigma}_{\text{model}}$) at least as large as the observed one, when any discrepancy is due solely to random sampling error. When this probability is very low (e.g., lower than $\alpha = .05$), then we reject the null hypothesis of exact fit and conclude that the model does not hold in the population. In other words, we conclude that the model is misspecified (i.e., the population discrepancy is not zero but contains discrepancy due to misspecification).
 
-The $\chi^2$ test of exact fit is based on the maximum likelihood (ML) discrepancy function. When all assumptions are satisfied, $(N − 1) × \text{F}_{\textsc{ML}}$ has a central $\chi^2$ distribution:
+The $\chi^2$ test of exact fit is based on the maximum likelihood (ML) discrepancy function. When all assumptions are satisfied, $(N − 1) × \text{F}_{\text{ML}}$ has a central $\chi^2$ distribution:
 
 ```{=tex}
 \begin{equation}
-\chi^2 = (N-1) \times \text{F}_\textsc{ML}
+\chi^2 = (N-1) \times \text{F}_\text{ML}
 (\#eq:11-01)
 \end{equation}
 ```
@@ -73,7 +73,7 @@ One of the earliest and most popular descriptive fit indices is the Root Mean Sq
 \end{equation}
 ```
 
-where it assumed that the specified model will only be an approximation to reality and thus some specification error should be allowed such that $\mathbf\Sigma_{\text{model}}$ will never be exactly equal to $\mathbf\Sigma_{\text{population}}$. However, a question that then comes up is: when do we decide that the model is a close enough approximation to reality? When we look at Figure \@ref(fig:fig11-1), the population discrepancy is not assumed to be zero under the hypothesis of approximate fit. But how large can the specification error be before a model should be rejected? To accommodate approximate fit within the context of model fit evaluation, an additional error term is introduced: the ‘error of approximation’. The error of approximation concerns the questions of how well the model with unknown but optimally chosen parameters can be expected to fit the population covariance matrix. Assuming that the model is not expected to hold exactly in the population there will always be a certain amount of approximation error. Given that the model holds approximately, the $(N − 1) × \text{F}_{\text{ML}}$ from Equation \@ref(eq:11-01) follows a noncentral $\chi^2$ distribution, with noncentrality parameter $\lambda$. Therefore, if you think that the model is an approximation of reality, you should evaluate $(N − 1) × \text{F}_{\textsc{ML}}$ against a noncentral $\chi^2$ distribution instead of a central $\chi^2$ distribution. The noncentrality parameter ($\lambda$) can be estimated using^[For all calculations in the RMSEA section, replace N − 1 with N when using normal likelihood instead of Wishart likelihood, which is only used to analyze complete-data covariance structure.]:
+where it assumed that the specified model will only be an approximation to reality and thus some specification error should be allowed such that $\mathbf\Sigma_{\text{model}}$ will never be exactly equal to $\mathbf\Sigma_{\text{population}}$. However, a question that then comes up is: when do we decide that the model is a close enough approximation to reality? When we look at Figure \@ref(fig:fig11-1), the population discrepancy is not assumed to be zero under the hypothesis of approximate fit. But how large can the specification error be before a model should be rejected? To accommodate approximate fit within the context of model fit evaluation, an additional error term is introduced: the ‘error of approximation’. The error of approximation concerns the questions of how well the model with unknown but optimally chosen parameters can be expected to fit the population covariance matrix. Assuming that the model is not expected to hold exactly in the population there will always be a certain amount of approximation error. Given that the model holds approximately, the $(N − 1) × \text{F}_{\text{ML}}$ from Equation \@ref(eq:11-01) follows a noncentral $\chi^2$ distribution, with noncentrality parameter $\lambda$. Therefore, if you think that the model is an approximation of reality, you should evaluate $(N − 1) × \text{F}_{\text{ML}}$ against a noncentral $\chi^2$ distribution instead of a central $\chi^2$ distribution. The noncentrality parameter ($\lambda$) can be estimated using^[For all calculations in the RMSEA section, replace N − 1 with N when using normal likelihood instead of Wishart likelihood, which is only used to analyze complete-data covariance structure.]:
 
 ```{=tex}
 \begin{equation}
@@ -86,7 +86,7 @@ where $\varphi_{\text{A}}$ refers to the discrepancy due to approximation. Cudec
 
 ```{=tex}
 \begin{equation}
-\hat{\varphi}_{\text{A}} = \text{F}_{\textsc{ML}} - df / (N-1)
+\hat{\varphi}_{\text{A}} = \text{F}_{\text{ML}} - df / (N-1)
 (\#eq:11-06)
 \end{equation}
 ```
@@ -250,7 +250,7 @@ $$
 
 The associated $p$ value is .008, indicating that the difference in model fit is significant at $α = .05$. The fit of the full mediation model is significantly worse than the fit of the partial mediation model, so we would favour the latter model.
 
-Likewise, a single target model’s $\chi^2$ statistic can be thought of as a $Delta\chi^2$ statistic using equations \@ref(eq:11-16) and \@ref(eq:11-17), where Model B is replaced with the saturated Model S. In our illustrative example of child anxiety the overall $\chi^2$ is then obtained by:
+Likewise, a single target model’s $\chi^2$ statistic can be thought of as a $\Delta\chi^2$ statistic using equations \@ref(eq:11-16) and \@ref(eq:11-17), where Model B is replaced with the saturated Model S. In our illustrative example of child anxiety the overall $\chi^2$ is then obtained by:
 $$
 \Delta\chi^2 = \chi_A^2 - \chi_S^2 = \chi_A^2 - 0 = 7.429 – 0 = 7.429 , 	
 $$
@@ -351,13 +351,13 @@ library(nonnest2)
 vuongtest(AWmodelOut, AWmodel2Out)
 ```
 
-Or we could test differences in parsimony-adjusted fit using CIs for $Delta\text{AIC}$ or $Delta\text{BIC}$:
+Or we could test differences in parsimony-adjusted fit using CIs for $\Delta\text{AIC}$ or $\Delta\text{BIC}$:
 
 ```
 icci(AWmodelOut, AWmodel2Out, conf.level = 0.95)
 ```
 
-CIs for both $\Delta\text{AIC}$ and $Delta\text{BIC}$ would be provided, but you should only use one or the other, based upon whether you can assume one of the models is “correct” (BIC) or whether you merely wish to find the most generalizable model (AIC).  Note, again, that these tests require analysing the raw data, not summary statistics.  
+CIs for both $\Delta\text{AIC}$ and $\Delta\text{BIC}$ would be provided, but you should only use one or the other, based upon whether you can assume one of the models is “correct” (BIC) or whether you merely wish to find the most generalizable model (AIC).  Note, again, that these tests require analysing the raw data, not summary statistics.  
 
 ### Fit measures in `lavaan` when adjusting for non-normal data
 When correcting for non-normality, `lavTestLRT()` and `anova()` automatically calculate the correct adjusted $\Delta\chi^2$ test.  However, the default method (`"satorra.bentler.2001"`) can sometimes yield a negative test statistic, in which case it is impossible to compute a $p$ value.  If this happens, you can use a version of the test that will always yield a positive scaled test statistic:
@@ -407,7 +407,7 @@ When adjusting for non-normality (in which case the model must be fit to raw dat
 chi <- fitMeasures(AWmodelOut, "chisq.scaled") # nothing else changes
 ```
 
-When correcting the $Delta\chi^2$ statistic for model comparison, you can extract the $Delta\chi^2$ statistic from the `anova()` output, which will already be the scaled $\Delta\chi^2$ when adjusting for non-normality.  The $\Delta df$ can also be extracted from the output.
+When correcting the \$Delta\chi^2$ statistic for model comparison, you can extract the $\Delta\chi^2$ statistic from the `anova()` output, which will already be the scaled $\Delta\chi^2$ when adjusting for non-normality.  The $\Delta df$ can also be extracted from the output.
 ```
 AOV <- anova(AWmodelOut, AWmodel2Out)
 chi <- AOV[["Chisq diff"]][2]
